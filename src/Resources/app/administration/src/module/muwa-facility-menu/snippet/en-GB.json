@@ -2,11 +2,13 @@
   "muwa-facility-menu": {
     "general": {
       "mainMenuLabel": "Facility",
-      "description": "Maintenance and backups"
+      "description": "Maintenance and backups",
+      "repositoriesMenuLabel": "Repositories"
     },
     "navigation": {
       "overview": "Overview",
-      "backupRepositories": "Backup Repositories"
+      "backupRepositories": "Backup Repositories",
+      "repositoriesOverview": "Overview"
     },
     "index": {
       "backupRepositoriesDescription": "Create backup repositories, run backups and restore snapshots.",

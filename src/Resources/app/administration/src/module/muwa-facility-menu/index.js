@@ -5,7 +5,7 @@ import enGB from './snippet/en-GB.json';
 
 Shopware.Module.register('muwa-facility-menu', {
 
-    type: 'plugin',
+    type: 'core',
     name: 'muwaFacilityMenu',
     title: 'muwa-facility-menu.general.mainMenuLabel',
     description: 'muwa-facility-menu.general.description',
@@ -29,14 +29,14 @@ Shopware.Module.register('muwa-facility-menu', {
         {
             id: 'muwa-facility',
             label: 'muwa-facility-menu.general.mainMenuLabel',
-            color: '#c04d01',
+            color: '#ff9800',
             icon: 'regular-cog',
-            position: 80
+            position: 10
         },
         {
             id: 'muwa-facility-menu-index',
             label: 'muwa-facility-menu.navigation.overview',
-            color: '#c04d01',
+            color: '#ff9800',
             path: 'muwa.facility.menu.index',
             parent: 'muwa-facility',
             position: 10,
@@ -45,7 +45,7 @@ Shopware.Module.register('muwa-facility-menu', {
         {
             id: 'muwa-facility-backup-repository',
             label: 'muwa-facility-menu.navigation.backupRepositories',
-            color: '#c04d01',
+            color: '#ff9800',
             path: 'muwa.backup.repository.index',
             parent: 'muwa-facility',
             position: 20,
