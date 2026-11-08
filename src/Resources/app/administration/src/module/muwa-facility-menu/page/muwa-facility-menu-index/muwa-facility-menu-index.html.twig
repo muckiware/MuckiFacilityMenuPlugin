@@ -1,0 +1,29 @@
+{% block muwa_facility_menu_index %}
+<sw-page class="muwa-facility-menu-index">
+
+    {% block muwa_facility_menu_index_smart_bar_header %}
+    <template #smart-bar-header>
+        <h2>{{ $tc('muwa-facility-menu.general.mainMenuLabel') }}</h2>
+    </template>
+    {% endblock %}
+
+    {% block muwa_facility_menu_index_content %}
+    <template #content>
+        <sw-card-view>
+            {% block muwa_facility_menu_index_card_backup %}
+            <sw-card
+                position-identifier="muwa-facility-menu-index-backup"
+                :title="$tc('muwa-facility-menu.navigation.backupRepositories')"
+            >
+                <p>{{ $tc('muwa-facility-menu.index.backupRepositoriesDescription') }}</p>
+                <router-link :to="{ name: 'muwa.backup.repository.index' }">
+                    {{ $tc('muwa-facility-menu.index.openLink') }}
+                </router-link>
+            </sw-card>
+            {% endblock %}
+        </sw-card-view>
+    </template>
+    {% endblock %}
+
+</sw-page>
+{% endblock %}

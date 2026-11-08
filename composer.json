@@ -1,0 +1,55 @@
+{
+	"name" : "muckiware/facility-menu-plugin",
+	"description" : "Muckiware Facility Menu Plugin for Shopware 6, admin menu entries for the Muckiware Facility Plugin",
+	"version": "1.0.0",
+	"keywords": [
+		"shopware6",
+		"administration",
+		"menu",
+		"navigation",
+		"backup",
+		"plugin"
+	],
+	"type" : "shopware-platform-plugin",
+	"license" : "MIT",
+	"authors": [
+		{
+			"name": "muckiware"
+		}
+	],
+	"extra" : {
+		"shopware-plugin-class" : "MuckiFacilityMenuPlugin\\MuckiFacilityMenuPlugin",
+		"copyright" : "(c) by muckiware",
+		"label" : {
+			"de-DE" : "Mucki Facility Menü Erweiterung",
+			"en-GB" : "Mucki Facility Menu Plugin"
+		}
+	},
+	"require" : {
+		"php" : "~8.2.0 || ~8.3.0 || ~8.4.0",
+		"shopware/core": "~6.6.10.1 || ~6.7.0",
+		"muckiware/facility-plugin": "^0.8 || ^1.0"
+	},
+	"require-dev" : {
+		"phpstan/phpstan" : "*"
+	},
+	"autoload" : {
+		"psr-4" : {
+			"MuckiFacilityMenuPlugin\\" : "src/"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"MuckiFacilityMenuPlugin\\": "tests/"
+		}
+	},
+	"config": {
+		"allow-plugins": {
+			"symfony/runtime": true,
+			"php-http/discovery": false
+		}
+	},
+	"scripts": {
+		"phpstan": "./vendor/bin/phpstan analyse -n --no-progress"
+	}
+}
