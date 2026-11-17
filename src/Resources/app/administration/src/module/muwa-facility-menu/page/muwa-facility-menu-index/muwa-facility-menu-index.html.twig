@@ -10,15 +10,59 @@
     {% block muwa_facility_menu_index_content %}
     <template #content>
         <sw-card-view>
-            {% block muwa_facility_menu_index_card_backup %}
+            {% block muwa_facility_menu_index_card_intro %}
             <sw-card
-                position-identifier="muwa-facility-menu-index-backup"
-                :title="$tc('muwa-facility-menu.navigation.backupRepositories')"
+                position-identifier="muwa-facility-menu-index-intro"
+                :title="$t('muwa-facility-menu.index.intro.title')"
             >
-                <p>{{ $tc('muwa-facility-menu.index.backupRepositoriesDescription') }}</p>
-                <router-link :to="{ name: 'muwa.backup.repository.index' }">
-                    {{ $tc('muwa-facility-menu.index.openLink') }}
+                <p>{{ $t('muwa-facility-menu.index.intro.text') }}</p>
+                <h4>{{ $t('muwa-facility-menu.index.intro.workflowTitle') }}</h4>
+                <ol>
+                    <li
+                        v-for="step in workflowSteps"
+                        :key="step"
+                    >
+                        {{ $t('muwa-facility-menu.index.intro.workflow.' + step) }}
+                    </li>
+                </ol>
+            </sw-card>
+            {% endblock %}
+
+            {% block muwa_facility_menu_index_card_sections %}
+            <sw-card
+                v-for="section in sections"
+                :key="section.key"
+                :position-identifier="'muwa-facility-menu-index-' + section.key"
+                :title="$t('muwa-facility-menu.navigation.' + section.key)"
+            >
+                <p>{{ $t('muwa-facility-menu.index.' + section.key + '.text') }}</p>
+                <ul>
+                    <li
+                        v-for="item in section.items"
+                        :key="item"
+                    >
+                        {{ $t('muwa-facility-menu.index.' + section.key + '.items.' + item) }}
+                    </li>
+                </ul>
+                <router-link :to="section.route">
+                    {{ $t('muwa-facility-menu.index.openLink') }}
                 </router-link>
+            </sw-card>
+            {% endblock %}
+
+            {% block muwa_facility_menu_index_card_notes %}
+            <sw-card
+                position-identifier="muwa-facility-menu-index-notes"
+                :title="$t('muwa-facility-menu.index.notes.title')"
+            >
+                <ul>
+                    <li
+                        v-for="note in notes"
+                        :key="note"
+                    >
+                        {{ $t('muwa-facility-menu.index.notes.items.' + note) }}
+                    </li>
+                </ul>
             </sw-card>
             {% endblock %}
         </sw-card-view>

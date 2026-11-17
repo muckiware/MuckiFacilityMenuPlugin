@@ -1,0 +1,26 @@
+.muwa-facility-menu-index {
+  p,
+  h4,
+  ol,
+  ul {
+    margin-bottom: 16px;
+  }
+
+  ol,
+  ul {
+    padding-left: 20px;
+  }
+
+  ol {
+    list-style: decimal;
+  }
+
+  ul {
+    list-style: disc;
+  }
+
+  li {
+    margin-bottom: 4px;
+    line-height: 1.5;
+  }
+}

@@ -1,7 +1,7 @@
 {
 	"name" : "muckiware/facility-menu-plugin",
 	"description" : "Muckiware Facility Menu Plugin for Shopware 6, admin menu entries for the Muckiware Facility Plugin",
-	"version": "1.0.1",
+	"version": "1.1.0",
 	"keywords": [
 		"shopware6",
 		"administration",
@@ -27,7 +27,7 @@
 	},
 	"require" : {
 		"php" : "~8.3.0 || ~8.4.0 || ~8.5.0",
-		"muckiware/facility-plugin": "^0.8 || ^0.9 || ^1.0"
+		"muckiware/facility-plugin": "~0.8 || ^1.0"
 	},
 	"require-dev" : {
 		"phpstan/phpstan" : "*"

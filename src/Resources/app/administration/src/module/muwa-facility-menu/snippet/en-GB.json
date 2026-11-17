@@ -8,11 +8,62 @@
     "navigation": {
       "overview": "Overview",
       "backupRepositories": "Backup Repositories",
+      "databaseConnections": "Database Connections",
+      "s3Connections": "S3 Connections",
       "repositoriesOverview": "Overview"
     },
     "index": {
-      "backupRepositoriesDescription": "Create backup repositories, run backups and restore snapshots.",
-      "openLink": "Open"
+      "openLink": "Open",
+      "intro": {
+        "title": "What can you do here?",
+        "text": "Facility backs up a database as well as selected files and folders into encrypted backup repositories, based on the backup tool restic. Every backup creates snapshots that you can restore at any time. Optionally, each repository is also mirrored to an S3 bucket as an off-site copy.",
+        "workflowTitle": "Typical workflow",
+        "workflow": {
+          "connections": "Optional: create a database connection if a database other than the default database should be backed up. For an off-site copy, also create an S3 connection.",
+          "repository": "Create a backup repository or take over an existing restic repository. Set the repository path, password, restore path, database dump type and the paths to back up.",
+          "backup": "Start a backup manually with \"Start backup\" or run it automatically with a cron expression in the \"Schedule\" tab.",
+          "check": "Check the result: the \"Checks\", \"Snapshots\" and \"Repository status\" tabs show whether the backup succeeded and how large the repository is.",
+          "restore": "Restore a snapshot when needed. Restored database dumps can be downloaded directly in the administration."
+        }
+      },
+      "backupRepositories": {
+        "text": "A backup repository is the central configuration: what is backed up, where it goes, and how it is restored.",
+        "items": {
+          "create": "Create a new repository or take over an existing restic repository. The repository path and password cannot be changed afterwards.",
+          "paths": "Choose the backup paths (single files or whole folders) and whether and how the database is dumped: one file, one file per table, or not at all.",
+          "backup": "Trigger backups with \"Start backup\". The backup runs in the background; afterwards the repository is checked automatically with restic check.",
+          "schedule": "Set up automatic backups with a cron expression and timezone in the \"Schedule\" tab, and follow the status, last and next execution.",
+          "snapshots": "In the \"Snapshots\" tab, restore snapshots, remove old snapshots and download restored database dumps.",
+          "status": "See the size, file count and number of snapshots including their history in the \"Repository status\" tab."
+        }
+      },
+      "databaseConnections": {
+        "text": "By default, a backup dumps the database of the own installation. With a database connection you back up another database instead, on the same server or on another host.",
+        "items": {
+          "purpose": "Create a connection with name, type (MySQL / MariaDB), host, port, database and user, then choose it in the backup configuration.",
+          "check": "Test the credentials with \"Test connection\" before the first backup runs.",
+          "password": "The password can be stored encrypted or read from an environment variable (MUWA_DB_…) or a file below var/secrets/. It is never sent back to the administration.",
+          "delete": "A connection that is still used by a backup configuration cannot be deleted."
+        }
+      },
+      "s3Connections": {
+        "text": "With an S3 connection, a backup repository is mirrored to an S3 compatible bucket (AWS S3, MinIO, Ceph and others) as an off-site copy after every successfully checked backup.",
+        "items": {
+          "purpose": "Create a connection with provider, endpoint, region, access key id and secret access key, and test it with \"Test connection\".",
+          "target": "In the backup configuration, tab \"Configuration\", section \"S3 mirror\", save the connection, bucket and an optional prefix as the mirror target.",
+          "worker": "The mirror runs as a separate background task and needs a running message worker. The first mirror of a large repository may take several hours.",
+          "safeguards": "Use a dedicated bucket or prefix for each repository: the mirror deletes everything there that no longer exists locally."
+        }
+      },
+      "notes": {
+        "title": "Important notes",
+        "items": {
+          "password": "Keep the repository password in a safe place. Without it, the backups cannot be decrypted anymore, not even with restic directly.",
+          "worker": "Backups, restores and S3 mirrors run in the background. A message worker must be running for this.",
+          "dashboard": "Two dashboard cards show the backup status and the S3 transfer status. They are switched on in the plugin configuration.",
+          "cleanup": "Additional command line commands are available for maintenance, for example to clean up large database tables."
+        }
+      }
     }
   }
 }

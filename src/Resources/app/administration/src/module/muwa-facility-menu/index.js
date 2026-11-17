@@ -10,7 +10,7 @@ Shopware.Module.register('muwa-facility-menu', {
     title: 'muwa-facility-menu.general.mainMenuLabel',
     description: 'muwa-facility-menu.general.description',
     color: '#c04d01',
-    icon: 'regular-cog',
+    icon: 'regular-save',
 
     snippets: {
         'de-DE': deDE,
@@ -30,7 +30,7 @@ Shopware.Module.register('muwa-facility-menu', {
             id: 'muwa-facility',
             label: 'muwa-facility-menu.general.mainMenuLabel',
             color: '#ff9800',
-            icon: 'regular-cog',
+            icon: 'regular-save',
             position: 10
         },
         {
@@ -49,6 +49,26 @@ Shopware.Module.register('muwa-facility-menu', {
             path: 'muwa.backup.repository.index',
             parent: 'muwa-facility',
             position: 20,
+            privilege: 'muwa_backup_repository.viewer'
+        },
+        {
+            id: 'muwa-facility-database-connection',
+            label: 'muwa-facility-menu.navigation.databaseConnections',
+            color: '#ff9800',
+            path: 'muwa.backup.repository.index',
+            params: { tab: 'databaseConnectionList' },
+            parent: 'muwa-facility',
+            position: 30,
+            privilege: 'muwa_backup_repository.viewer'
+        },
+        {
+            id: 'muwa-facility-s3-connection',
+            label: 'muwa-facility-menu.navigation.s3Connections',
+            color: '#ff9800',
+            path: 'muwa.backup.repository.index',
+            params: { tab: 's3ConnectionList' },
+            parent: 'muwa-facility',
+            position: 40,
             privilege: 'muwa_backup_repository.viewer'
         }
     ]
