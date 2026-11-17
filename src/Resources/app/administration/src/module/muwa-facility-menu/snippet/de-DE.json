@@ -8,11 +8,62 @@
     "navigation": {
       "overview": "Übersicht",
       "backupRepositories": "Backup Repositories",
+      "databaseConnections": "Datenbankverbindungen",
+      "s3Connections": "S3-Verbindungen",
       "repositoriesOverview": "Überblick"
     },
     "index": {
-      "backupRepositoriesDescription": "Backup Repositories anlegen, Backups erstellen und Snapshots wiederherstellen.",
-      "openLink": "Öffnen"
+      "openLink": "Öffnen",
+      "intro": {
+        "title": "Was ist hier zu tun?",
+        "text": "Facility sichert eine Datenbank sowie ausgewählte Dateien und Ordner in verschlüsselte Backup Repositories. Grundlage ist das Backup-Tool restic. Aus den Backups entstehen Snapshots, die du jederzeit wiederherstellen kannst. Auf Wunsch wird jedes Repository zusätzlich als externe Kopie in einen S3-Bucket gespiegelt.",
+        "workflowTitle": "Typischer Ablauf",
+        "workflow": {
+          "connections": "Optional: Datenbankverbindung anlegen, wenn nicht die Standarddatenbank, sondern eine andere Datenbank gesichert werden soll. Für eine externe Kopie zusätzlich eine S3-Verbindung anlegen.",
+          "repository": "Backup Repository anlegen oder ein vorhandenes restic-Repository übernehmen. Dabei Repository-Pfad, Passwort, Restore-Pfad, Datenbank-Dump-Typ und die zu sichernden Pfade festlegen.",
+          "backup": "Backup manuell über „Backup starten“ auslösen oder im Tab „Zeitplan“ automatisch per Cron-Ausdruck ausführen lassen.",
+          "check": "Ergebnis prüfen: In den Tabs „Checks“, „Snapshots“ und „Repository Status“ siehst du, ob das Backup fehlerfrei war und wie groß das Repository ist.",
+          "restore": "Bei Bedarf einen Snapshot wiederherstellen. Wiederhergestellte Datenbank-Dumps lassen sich direkt in der Administration herunterladen."
+        }
+      },
+      "backupRepositories": {
+        "text": "Ein Backup Repository ist die zentrale Konfiguration: Was wird gesichert, wohin, und wie wird wiederhergestellt.",
+        "items": {
+          "create": "Neues Repository anlegen oder ein bestehendes restic-Repository übernehmen. Repository-Pfad und Passwort lassen sich danach nicht mehr ändern.",
+          "paths": "Backup-Pfade auswählen (einzelne Dateien oder ganze Ordner) und festlegen, ob und wie die Datenbank gedumpt wird: eine Datei, eine Datei pro Tabelle oder gar nicht.",
+          "backup": "Backups über „Backup starten“ anstoßen. Das Backup läuft im Hintergrund; danach wird das Repository automatisch mit restic check geprüft.",
+          "schedule": "Im Tab „Zeitplan“ automatische Backups mit Cron-Ausdruck und Zeitzone einrichten und Status, letzte und nächste Ausführung verfolgen.",
+          "snapshots": "Im Tab „Snapshots“ Snapshots wiederherstellen, alte Snapshots löschen und wiederhergestellte Datenbank-Dumps herunterladen.",
+          "status": "Im Tab „Repository Status“ Größe, Dateianzahl und Anzahl der Snapshots samt Verlauf ansehen."
+        }
+      },
+      "databaseConnections": {
+        "text": "Standardmäßig sichert ein Backup die Datenbank der eigenen Installation. Mit einer Datenbankverbindung sicherst du stattdessen eine andere Datenbank, auf demselben oder einem anderen Server.",
+        "items": {
+          "purpose": "Verbindung mit Name, Typ (MySQL / MariaDB), Host, Port, Datenbank und Benutzer anlegen und danach in der Backup-Konfiguration auswählen.",
+          "check": "Mit „Verbindung prüfen“ die Zugangsdaten testen, bevor das erste Backup läuft.",
+          "password": "Das Passwort kann verschlüsselt gespeichert oder aus einer Umgebungsvariable (MUWA_DB_…) bzw. einer Datei unter var/secrets/ gelesen werden. Es wird nie an die Administration zurückgegeben.",
+          "delete": "Eine Verbindung, die noch von einer Backup-Konfiguration genutzt wird, kann nicht gelöscht werden."
+        }
+      },
+      "s3Connections": {
+        "text": "Über eine S3-Verbindung wird ein Backup Repository nach jedem erfolgreich geprüften Backup als externe Kopie in einen S3-kompatiblen Bucket gespiegelt (AWS S3, MinIO, Ceph und andere).",
+        "items": {
+          "purpose": "Verbindung mit Anbieter, Endpoint, Region, Access Key ID und Secret Access Key anlegen und mit „Verbindung prüfen“ testen.",
+          "target": "In der Backup-Konfiguration im Tab „Configuration“ unter „S3-Spiegelung“ Verbindung, Bucket und optionales Präfix als Spiegelziel speichern.",
+          "worker": "Die Spiegelung läuft als eigene Hintergrundaufgabe und braucht einen laufenden Message-Worker. Die erste Spiegelung eines großen Repositories kann mehrere Stunden dauern.",
+          "safeguards": "Für jedes Repository einen eigenen Bucket oder ein eigenes Präfix nutzen: Die Spiegelung löscht dort, was lokal nicht mehr existiert."
+        }
+      },
+      "notes": {
+        "title": "Wichtige Hinweise",
+        "items": {
+          "password": "Das Repository-Passwort unbedingt sicher aufbewahren. Ohne dieses Passwort lassen sich die Backups nicht mehr entschlüsseln, auch nicht direkt mit restic.",
+          "worker": "Backups, Wiederherstellungen und S3-Spiegelungen laufen im Hintergrund. Dafür muss ein Message-Worker laufen.",
+          "dashboard": "Auf dem Dashboard können zwei Karten mit dem Backup-Status und dem S3-Übertragungsstatus eingeblendet werden. Das wird in der Plugin-Konfiguration eingeschaltet.",
+          "cleanup": "Für die Wartung gibt es zusätzlich Kommandozeilen-Befehle, zum Beispiel zum Aufräumen großer Datenbanktabellen."
+        }
+      }
     }
   }
 }
